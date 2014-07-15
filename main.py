@@ -3,6 +3,7 @@ import tornado.ioloop
 import tornado.web
 import os, uuid
 import zipfile
+import multiprocessing, subprocess, sys
 from time import gmtime, strftime, sleep
  
 __UPLOADS__ = "uploads/"
@@ -25,7 +26,7 @@ class Upload(tornado.web.RequestHandler):
 
         self.finish(cname + " is uploaded!! Check %s folder" %__UPLOADS__)
 
-        # 
+        p = subprocess.Popen(['python', 'process_audio.py',__UPLOADS__ + cname], stdout=subprocess.PIPE,  stderr=subprocess.STDOUT)
  
  
 application = tornado.web.Application([
