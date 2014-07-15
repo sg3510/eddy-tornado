@@ -2,6 +2,7 @@ import tornado
 import tornado.ioloop
 import tornado.web
 import os, uuid
+from time import gmtime, strftime
  
 __UPLOADS__ = "uploads/"
  
@@ -12,12 +13,13 @@ class Userform(tornado.web.RequestHandler):
  
 class Upload(tornado.web.RequestHandler):
     def post(self):
-        print self
         fileinfo = self.request.files['filearg'][0]
+        print self.request.files['filearg'][0]
         print "fileinfo is", fileinfo
         fname = fileinfo['filename']
         extn = os.path.splitext(fname)[1]
-        cname = str(uuid.uuid4()) + extn
+        # cname = str(uuid.uuid4()) + extn
+        cname = strftime("%Y-%m-%d_%H-%M-%S", gmtime()) + extn
         fh = open(__UPLOADS__ + cname, 'w')
         fh.write(fileinfo['body'])
         self.finish(cname + " is uploaded!! Check %s folder" %__UPLOADS__)
