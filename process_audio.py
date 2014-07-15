@@ -1,10 +1,11 @@
 import sys, zipfile, os
 from time import gmtime, strftime
 
+# Quick debug code - writes 
 filename = sys.argv[1]
 fname = os.path.splitext(filename)[0]
 print zipfile.is_zipfile(sys.argv[1])
-f = open('process_audio.out', 'w+')
+f = open('process_audio-'+strftime("%Y%m%d_%H%M%S", gmtime())+'.out', 'w+')
 f.write(strftime("%Y-%m-%d %H:%M:%S", gmtime())+"\n")
 f.write(str(zipfile.is_zipfile(sys.argv[1])))
 
