@@ -12,6 +12,7 @@ class Userform(tornado.web.RequestHandler):
  
 class Upload(tornado.web.RequestHandler):
     def post(self):
+        print self
         fileinfo = self.request.files['filearg'][0]
         print "fileinfo is", fileinfo
         fname = fileinfo['filename']
