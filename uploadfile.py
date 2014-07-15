@@ -1,10 +1,17 @@
-import requests, sys
+import requests, sys, os, zipfile
 
 
-file_name = sys.argv
-print file_name[1]
+file_name = sys.argv[1]
+fname = os.path.splitext(file_name)[0]
+
+file = zipfile.ZipFile(fname+".zip", "w")
+file.write(file_name, os.path.basename(file_name), zipfile.ZIP_DEFLATED)
+file.close()
+
 url = 'http://localhost:8888/upload'
-files = {'filearg': open(file_name[1], 'rb')}
+files = {'filearg': open(fname+".zip", 'rb')}
+
+os.remove(fname+".zip")
 
 r = requests.post(url, files=files)
 r.text
