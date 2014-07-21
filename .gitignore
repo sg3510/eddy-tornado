@@ -53,4 +53,9 @@ docs/_build/
 # PyBuilder
 target/
 
+#Audio Files
+*.wav
+*.mp3
+*.aiff
+
 /uploads
