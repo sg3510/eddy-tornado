@@ -5,6 +5,7 @@ from collections import deque
 import os
 import time
 import math
+import uploadfile
 
 # Microphone stream config.
 CHUNK = 1024  # CHUNKS of bytes to read each time from mic
@@ -60,8 +61,8 @@ def listen_for_speech(threshold=THRESHOLD, num_phrases=-1):
             filename = save_speech(list(prev_audio) + audio2send, p)
             
             if num_phrases == -1:
-                print "Caught 1" #, r
-            
+                print "Uploading" #, r
+
             # Reset all
             started = False
             slid_win = deque(maxlen=SILENCE_LIMIT * rel)
@@ -92,7 +93,8 @@ def save_speech(data, p):
     wf.setframerate(RATE)  # TODO make this value a function parameter?
     wf.writeframes(data)
     wf.close()
-    return filename + '.wav'
+    name = filename + '.wav'
+    return uploadfile.upload_file(name)
 
 
 if(__name__ == '__main__'):
