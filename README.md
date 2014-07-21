@@ -11,6 +11,8 @@ application.listen(8888)
 ```
 line.
 
-To send file use uploadfile.py with file as argument.
+To start listening for and sending audio, run record.py
+
+File uploading is handled by uploadfile.py
 
 Audio processing and tagging happens in process_audio.py
